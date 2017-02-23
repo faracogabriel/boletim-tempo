@@ -158,7 +158,7 @@ public class ProcessDataView extends JPanel {
 		rdbtnAllDays.setToolTipText("Selecione para processar todos os dias");
 		rdbtnAllDays.setFont(new Font("Cambria Math", Font.PLAIN, 20));
 
-		//cria o radiobutton para processar um ï¿½nico dia
+		//cria o radiobutton para processar um único dia
 		rdbtnADay = new JRadioButton("\u00DAnico dia");
 		rdbtnADay.setToolTipText("Selecione para processar um \u00FAnico dia");
 		rdbtnADay.setFont(new Font("Cambria Math", Font.PLAIN, 20));
