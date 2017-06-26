@@ -198,10 +198,10 @@ public class WorkWindow {
 				}                
             }
             
-            //quando a janela volta a estar ativa (ap√≥s o fechamento do dialog anterior)
+            //quando a janela volta a estar ativa (apÛs o fechamento do dialog anterior)
             @Override
             public void windowActivated(WindowEvent e) {
-            	//torna-a novamente "fech√°vel"
+            	//torna-a novamente "fech·vel"
             	setClosable();
             }
             

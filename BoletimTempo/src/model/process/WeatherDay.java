@@ -8,7 +8,7 @@ import java.util.List;
  * respective measurements. The data from this day are initially stored and then
  * are processed
  * 
- * @author Elloï¿½ B. Guedes
+ * @author Elloá B. Guedes
  *
  */
 public class WeatherDay {

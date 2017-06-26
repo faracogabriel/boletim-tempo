@@ -21,7 +21,7 @@ public class DayPeriod {
 	private double maxDirect;
 	private double acumRain = 0.0;
 
-	private double humidityHighTemp = 0.0;    //UR instante da m√°xima
+	private double humidityHighTemp = 0.0;    //UR instante da m·xima
 
 	/**
 	 * Creates a DayPeriod and processes its metrics

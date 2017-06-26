@@ -74,7 +74,7 @@ public class PeriodFigure {
 			periodName = Util.ranksPeriod(count);
 			System.out.println(periodName);
 			bi[count] = organizeImage(date, periodName, ddl.getHighTemperature(), ddl.getLowTemperature(),
-					ddl.getWindVelocity(), ddl.getTotalRain(), ddl.getHeatIndex());	//indice de calor
+					ddl.getWindVelocity(), ddl.getTotalRain(), ddl.getHeatIndex());
 			System.out.println("figura diária gerada");
 			weatherDay.remove(0);
 			return bi;
@@ -107,21 +107,15 @@ public class PeriodFigure {
 			X_PERIOD = 1250;
 		}
 		
-		if( periodName.equals("manha") || periodName.equals("tarde") ) {
+		if( periodName.equals("manha") || periodName.equals("tarde") || periodName.equals("noite") || periodName.equals("madrugada"))  {
 			if(acumRain == 0.0) {
-				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/sunny.png")).getImage();
-			} else {
-				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/rainy.png")).getImage();
-			}
-		} else if(periodName.equals("noite") || periodName.equals("madrugada")) {
-			if(acumRain == 0.0) {
-				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/night.png")).getImage();
-			}
-			else {
-				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/rainy_night.png")).getImage();
+				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/daily.png")).getImage();
 			}
 		} else {
-			img = new ImageIcon(ClassLoader.getSystemResource("resources/img/daily.png")).getImage();
+			if (acumRain == 0.0) {
+				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/sunny.png")).getImage();
+			} else {img = new ImageIcon(ClassLoader.getSystemResource("resources/img/rainy.png")).getImage();
+			}
 		}
 		
 		if (periodName.equals("manha")) {
@@ -134,23 +128,67 @@ public class PeriodFigure {
 		g2d = (Graphics2D) biToSave.getGraphics();
 		g2d.drawImage(img, 0, 0, null);
 
-		g2d.setColor(new Color(51,51,51));
-		g2d.setFont(new Font("Cambria", Font.BOLD, 240));
-		g2d.drawString(periodName.toUpperCase(), X_PERIOD, Y_PERIOD);
+		g2d.setColor(new Color(0,0,0));
 		g2d.setFont(new Font("Cambria", Font.BOLD, 220));
+		g2d.drawString(periodName.toUpperCase(), X_PERIOD, Y_PERIOD);
+		g2d.setFont(new Font("Cambria", Font.BOLD, 200));
 		g2d.drawString(date.replace(".", "/"), 1040, 660);
 
-		g2d.setFont(new Font("Cambria", Font.BOLD, 200));
+		g2d.setFont(new Font("Cambria", Font.BOLD, 180));
 		
-		g2d.drawString(String.format("%.1f", highTemp ).replace(",", ",") + " °C", 1500, 1450);
-		g2d.drawString(String.format("%.1f", lowTemp ).replace(",", ",") + " °C", 1500, 1760);
-		g2d.drawString(String.format("%.1f", windVelocity).replace(",", ",") + " m/s", 50, 2900);
-		if (!periodName.equals("manhã") && !periodName.equals("tarde") && !periodName.equals("noite") && !periodName.equals("madrugada")){
-			g2d.drawString(String.format("%.1f", heatIndex).replace(",", ",") + " °C",  1500, 2900);
-		}
+		
+		g2d.drawString(String.format("%.1f", highTemp ) + " °C", 1500, 1550); 
+		g2d.drawString(String.format("%.1f", lowTemp ) + " °C", 1500, 1860); 
 		if(acumRain > 0.0) {
-			g2d.drawString( String.format("%.1f", acumRain).replace(",", ".") + " mm", 50, 1400);
+			g2d.drawString( String.format("Precipitação: %.1f", acumRain) + " mm", 320, 1100); //.replace(",", ",")
 		}
+		
+		g2d.setFont(new Font("Cambria", Font.BOLD, 140));
+		g2d.drawString("Temperaturas", 1350, 1330); 
+		g2d.drawString("Rajada Máxima", 100, 2700);
+		g2d.drawString(String.format("%.1f", windVelocity) + " m/s", 100, 2890);
+		
+		g2d.setFont(new Font("Cambria", Font.BOLD, 100));
+		if (windVelocity < 0.5){
+			g2d.drawString("Calmo", 130, 3050);
+		} else if (windVelocity >= 0.5 && windVelocity < 1.5){
+			g2d.drawString("Quase Calmo", 130, 3050);
+		} else if (windVelocity >= 1.5 && windVelocity < 3){
+			g2d.drawString("Brisa Amena", 130, 3050);
+		} else if (windVelocity >= 3 && windVelocity < 5.8){
+			g2d.drawString("Vento Leve", 130, 3050);
+		} else if (windVelocity >= 5.8 && windVelocity < 8.4){
+			g2d.drawString("Vento Moderado", 130, 3050);
+		} else if (windVelocity >= 8.4 && windVelocity < 11.2){
+			g2d.drawString("Vento Forte", 130, 3050);
+		} else if (windVelocity >= 11.2 && windVelocity < 14){
+			g2d.drawString("Vento Muito Forte", 130, 3050);
+		} else if (windVelocity >= 0.5 && windVelocity < 16.7){
+			g2d.drawString("Vento Fortíssimo", 130, 3050);
+		} else if (windVelocity >= 0.5 && windVelocity < 21){
+			g2d.drawString("Ventania", 130, 3050);
+		} else if (windVelocity >= 21 && windVelocity < 27.9){
+			g2d.drawString("Vendaval", 130, 3050);
+		} else if (windVelocity >= 27.9){
+			g2d.drawString("Furacão", 130, 3050);
+		} 
+		
+		if (!periodName.equals("manhã") && !periodName.equals("tarde") && !periodName.equals("noite") && !periodName.equals("madrugada")){
+			if (heatIndex >= 27.1 && heatIndex < 32){
+				g2d.drawString("Cautela", 1300, 3050);
+			} else if (heatIndex >= 32 && heatIndex < 41){
+				g2d.drawString("Cautela Extrema", 1300, 3050);
+			} else if (heatIndex >= 41 && heatIndex < 54){
+				g2d.drawString("Perigo", 1300, 3050);
+			} else if (heatIndex >= 54){
+				g2d.drawString("Perigo Extremo", 1300, 3050);
+			}  
+			g2d.setFont(new Font("Cambria", Font.BOLD, 140));
+			g2d.drawString(String.format("%.1f", heatIndex) + " °C",  1300, 2890);
+			g2d.drawString("Índice de Calor", 1300, 2700);
+			
+		}
+		
 		g2d.dispose();
 		
 		System.out.println("fim organizar figura");
