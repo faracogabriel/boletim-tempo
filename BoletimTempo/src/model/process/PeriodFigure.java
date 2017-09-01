@@ -108,9 +108,9 @@ public class PeriodFigure {
 		}
 		
 		if( periodName.equals("manha") || periodName.equals("tarde") || periodName.equals("noite") || periodName.equals("madrugada"))  {
-			if(acumRain == 0.0) {
-				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/daily.png")).getImage();
-			}
+			
+			img = new ImageIcon(ClassLoader.getSystemResource("resources/img/daily.png")).getImage();
+			
 		} else {
 			if (acumRain == 0.0) {
 				img = new ImageIcon(ClassLoader.getSystemResource("resources/img/sunny.png")).getImage();
@@ -140,7 +140,7 @@ public class PeriodFigure {
 		g2d.drawString(String.format("%.1f", highTemp ) + " °C", 1500, 1550); 
 		g2d.drawString(String.format("%.1f", lowTemp ) + " °C", 1500, 1860); 
 		if(acumRain > 0.0) {
-			g2d.drawString( String.format("Precipitação: %.1f", acumRain) + " mm", 320, 1100); //.replace(",", ",")
+			g2d.drawString( String.format("Precipitação: %.1f", acumRain) + " mm", 330, 1100);
 		}
 		
 		g2d.setFont(new Font("Cambria", Font.BOLD, 140));
